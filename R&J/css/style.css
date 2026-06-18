@@ -1,0 +1,94 @@
+/* --- 1. WALLPAPER BASE --- */
+body {
+    /* Using your previous dark wallpaper, but you can change this URL to the red damask one! */
+    background-image: url('../images/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1a0000; /* Dark red fallback */
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centers everything nicely on the page */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+/* --- 2. THE LOW OPACITY BOX (Your Main Div) --- */
+/* --- THE COMPLETELY TRANSPARENT BOX --- */
+.glass-cage {
+    background-color: transparent; /* Makes the box completely invisible */
+    padding: 40px;
+    
+    /* THE CSS GRID EXACTLY FROM YOUR DRAWING */
+    display: grid;
+    grid-template-columns: 1fr 1.6fr; 
+    grid-template-rows: 1.5fr 0.8fr 1.2fr; 
+    
+    grid-template-areas:
+        "box1 box4"
+        "box2 box4"
+        "box3 box5";
+    
+    gap: 25px; 
+    width: 100%;
+    max-width: 950px; 
+}
+
+/* Assigning the slots to the grid areas */
+.slot-1 { grid-area: box1; }
+.slot-2 { grid-area: box2; }
+.slot-3 { grid-area: box3; }
+.slot-4 { grid-area: box4; }
+.slot-5 { grid-area: box5; }
+
+/* --- 3. THE LAYERED FRAME MECHANICS --- */
+.frame-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    /* Optional: If you want to see the literal white boxes from your drawing to help you design, 
+       uncomment the line below: */
+    /* background-color: rgba(255, 255, 255, 0.1); */ 
+}
+
+.frame-container:hover {
+    transform: scale(1.04);
+}
+
+.frame-container:hover .character-art {
+    filter: invert(100%) grayscale(100%);
+}
+
+.frame-img {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 2;
+    object-fit: contain; /* Ensures the frames fit perfectly inside their slots without stretching */
+}
+
+.character-art {
+    position: absolute;
+    z-index: 1;
+    top: 15%; 
+    left: 15%; 
+    width: 70%; 
+    height: 70%;
+    object-fit: cover;
+    transition: filter 0.2s ease;
+}
+
+/* Specific fix for the rotated eye to fit in the short middle slot */
+.eye-rotated {
+    transform: rotate(90deg);
+    mix-blend-mode: screen; 
+}
